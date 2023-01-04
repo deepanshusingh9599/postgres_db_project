@@ -1,0 +1,24 @@
+version : "3"
+services :
+   django_app1 :
+     build : .
+     depends_on:
+       - db
+     ports:
+         - "8000:8000"
+   db :
+     image : postgres:11.18-alpine
+     restart: always
+     environment:
+         - POSTGRES_USER=deepanshu
+         - POSTGRES_PASSWORD=Deep@9599
+         - POSTGRES_HOST=localhost
+         - POSTGRES_DB=test_db
+     ports:
+         - "5442:5432"
+     volumes:
+       - db:/var/lib/postgresql/data
+volumes:
+  db:
+    driver: local
+
